@@ -10,11 +10,12 @@ This is a basic pathfinding algorithm, based on Dijkstra's algorithm. Also known
 - Pygame
  
  
+# Illustrations:
 A-star (also referred to as A*) is one of the most successful search algorithms to find the shortest path between nodes or graphs.
  It is an informed search algorithm, as it uses information about path cost and also uses heuristics to find the solution.
- 
-# Illustrations:
+
 F = G + H
+
 One important aspect of A* is f = g + h. The f, g, and h variables are in the Node class and get calculated every time we create a new node.
  
  Here, these variables means;
