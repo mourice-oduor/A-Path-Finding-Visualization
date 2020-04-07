@@ -8,7 +8,7 @@ try:
     from tkinter import messagebox
     import os
 except:
-    import install_requirements  # install packages
+    import install_requirements
 
     import pygame
     import sys
@@ -17,8 +17,8 @@ except:
     from tkinter import ttk
     from tkinter import messagebox
     import os
-
-screen = pygame.display.set_mode((800, 800))
+    pygame.init()
+screen = pygame.display.set_mode((600, 600))
 
 class spot:
     def __init__(self, x, y):
@@ -64,8 +64,8 @@ red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
 grey = (220, 220, 220)
-w = 800 / cols
-h = 800 / row
+w = 600 / cols
+h = 600 / row
 cameFrom = []
 
 # create 2d array
@@ -103,27 +103,27 @@ def onsubmit():
     ed = endBox.get().split(',')
     start = grid[int(st[0])][int(st[1])]
     end = grid[int(ed[0])][int(ed[1])]
-    window.quit()
-    window.destroy()
+    root.quit()
+    root.destroy()
 
-window = Tk()
-label = Label(window, text='Start(x,y): ')
-startBox = Entry(window)
-label1 = Label(window, text='End(x,y): ')
-endBox = Entry(window)
-var = IntVar()
-showPath = ttk.Checkbutton(window, text='Show Steps :', onvalue=1, offvalue=0, variable=var)
-
-submit = Button(window, text='Submit', command=onsubmit)
-
-showPath.grid(columnspan=2, row=2)
-submit.grid(columnspan=2, row=3)
-label1.grid(row=1, pady=3)
-endBox.grid(row=1, column=1, pady=3)
-startBox.grid(row=0, column=1, pady=3)
+root = Tk()
+label = Label(root, text='Start(x,y): ')
 label.grid(row=0, pady=3)
+startBox = Entry(root)
+startBox.grid(row=0, column=1, pady=3)
+label1 = Label(root, text='End(x,y): ')
+label1.grid(row=1, pady=3)
+endBox = Entry(root)
+endBox.grid(row=1, column=1, pady=3)
+var = IntVar()
+showPath = ttk.Checkbutton(root, text='Show Steps :', onvalue=1, offvalue=0, variable=var)
+showPath.grid(columnspan=2, row=2)
 
-window.update()
+submit = Button(root, text='Submit', command=onsubmit)
+submit.grid(columnspan=2, row=3)
+
+
+root.update()
 mainloop()
 
 pygame.init()
@@ -132,8 +132,8 @@ openSet.append(start)
 def mousePress(x):
     t = x[0]
     w = x[1]
-    g1 = t // (800 // cols)
-    g2 = w // (800 // row)
+    g1 = t // (600 // cols)
+    g2 = w // (600 // row)
     acess = grid[g1][g2]
     if acess != start and acess != end:
         if acess.obs == False:
@@ -192,7 +192,7 @@ def main():
             end.show((255, 8, 127), 0)
 
             Tk().wm_withdraw()
-            result = messagebox.askokcancel('Program Finished', ('The program finished, the shortest distance \n to the path is ' + str(temp) + ' blocks away, \n would you like to re run the program?'))
+            result = messagebox.askokcancel('Program Finished', ('The program finished, the shortest distance \n to the path is ' + str(temp) + ' blocks away, \n would you like to re-run the program?'))
             if result == True:
                 os.execl(sys.executable,sys.executable, *sys.argv)
             else:
@@ -239,6 +239,10 @@ while True:
     ev = pygame.event.poll()
     if ev.type == pygame.QUIT:
         pygame.quit()
-    pygame.display.update()
-    main()
+        sys.exit()
 
+    pygame.display.update()
+#pygame.quit()
+
+if __name__ == '__main__':
+    main()
