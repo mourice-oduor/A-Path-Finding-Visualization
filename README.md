@@ -14,6 +14,12 @@ This is a basic pathfinding algorithm, based on Dijkstra's algorithm. Also known
 A-star (also referred to as A*) is one of the most successful search algorithms to find the shortest path between nodes or graphs.
  It is an informed search algorithm, as it uses information about path cost and also uses heuristics to find the solution.
 
+A* achieve optimality and completeness, two valuable property of search algorithms.
+ When a search algorithm has the property of optimality, it means it is guaranteed to find the best possible solution. 
+ 
+When a search algorithm has the property of completeness, it means that if a solution to a given problem exists, 
+ the algorithm is guaranteed to find it.
+
 F = G + H
 
 One important aspect of A* is f = g + h. The f, g, and h variables are in the Node class and get calculated every time we create a new node.
